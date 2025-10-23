@@ -1,7 +1,6 @@
-{"nome": "Lagoa no mar", "autor": "Jose Silva", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 2}
 {"nome": "Livro teste 1", "autor": "Autor 1", "Qde_disp": 10, "Qde_uso": 0, "rating": 2, "Registro": 1}
-{"nome": "Livro teste 2", "autor": "Autor 2", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 2}
-{"nome": "Estrelas", "autor": "Maria", "Qde_disp": 2, "Qde_uso": 0, "rating": 2, "Registro": 3}
+{"nome": "Lagoa no mar", "autor": "Jose Silva", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 2}
+{"nome": "Livro teste 2", "autor": "Autor 2", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 3}
 {"nome": "Sol", "autor": "Jo\u00e3o", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 4}
 {"nome": "Morte e vida", "autor": "Fidalgo", "Qde_disp": 2, "Qde_uso": 0, "rating": 1, "Registro": 5}
 {"nome": "Antonio", "autor": "Por Antonio", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 6}
@@ -10,7 +9,3 @@
 {"nome": "Reflexoes da juventude", "autor": "Manuel carvalho", "Qde_disp": 1, "Qde_uso": 0, "rating": 2, "Registro": 9}
 {"nome": "Ceu Azul", "autor": "Jose Saramago", "Qde_disp": 2, "Qde_uso": 0, "rating": 2, "Registro": 10}
 {"nome": "Fundamentos de Python", "autor": "Antonio Jos\u00e9 Silva", "Qde_disp": 2, "Qde_uso": 0, "rating": 2, "Registro": 11}
-{"nome": "Ultimo Moicano", "autor": "George Smith", "Qde_disp": 1, "Qde_uso": 0, "rating": 5, "Registro": 12}
-{"nome": "Novo livro 2025", "autor": "Desconhecido", "Qde_disp": 1, "Qde_uso": 0, "rating": 3, "Registro": 13}
-{"nome": "Biblia ", "autor": "Varios", "Qde_disp": 1, "Qde_uso": 0, "rating": 4, "Registro": 14}
-{"nome": "Livro teste", "autor": "Autor teste", "Qde_disp": 2, "Qde_uso": 0, "rating": 3, "Registro": 15}

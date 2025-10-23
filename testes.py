@@ -1,43 +1,187 @@
-import datetime
+import relatorios
 
-def busca_info(Registro, tipo):
+relatorios.relatorio_livros()
     
-    arquivo_para_ler = ''  
+def apaga_registro(registro_a_excluir):
     
-    if tipo == 'leitor':
-        arquivo_para_ler = "leitores.txt"
+    registro_a_excluir = str(registro_a_excluir) #volta para string
+    Registro = "Registro: " + registro_a_excluir
+
+
+    with open ("livros.txt","r") as arq:
+        lista_de_linhas = arq.readlines()
         
-    if tipo == 'livro':
-        arquivo_para_ler = "livros.txt"
+        arq.close() #Fecha arquivo
         
-    if tipo == 'emprestimo':
-        arquivo_para_ler = "emprestimos.txt"
-        
-    with open(arquivo_para_ler,"r") as arq:
-        
-        for linha in arq:
-            dicionario = eval(linha)
-        
-            procura = str(dicionario['Registro'])
-            procura = procura.strip()
-            Registro = Registro.strip()
+        for indice,linha in enumerate(lista_de_linhas):
             
-            if procura == Registro:
-                nome = dicionario
-                break
+            linha = linha.replace('"','')
+            linha = linha.replace("'","")
+            
+            
+            if Registro in linha:
+                indice_para_excluir = indice
+        
+        
+        if type(indice_para_excluir) is int:
+            lista_de_linhas.pop(indice_para_excluir)
+            print("Livro apagado com sucesso")
+            
+        else:
+            print("O Livro não foi localizado")
+        
+    with open("livros.txt","w") as arq: #Abre arquivo modo escrita
+            
+        for linha in lista_de_linhas:
+            linha.strip() # Tira eventuais espaços em branco no inicio ou final 
+            #linha = linha + '\n' #Coloca a próxima inserção na linha abaixo
+            arq.write(linha)
+        
+        arq.close()
+    
+
+
+    
+## Pergunta qual excluir
+
+registro_a_excluir = input("Digite o número do registro do livro a ser excluído\n")
+
+relatorios.limpa_linha_em_branco('livro')
+
+with open("livros.txt","r") as arq:
+    
+    for linha in arq:
+        dicionario = eval(linha)
+        
+        print("Registro a excluir: ", registro_a_excluir)
+        print(dicionario)
+        print(registro_a_excluir in dicionario)
+        print(type(dicionario))
+        
+        registro_a_excluir = int(registro_a_excluir)
+        
+        if dicionario['Registro'] == registro_a_excluir:
+            
+            ficha = relatorios.monta_string_livro(dicionario)
+            
+            print(ficha)
+
+#Fecha arquivo
+arq.close()
+
+acao = input("\nDeseja realmente apagar ? s/n\n")
+acao.lower()
+
+
+if acao == 's':
+    apaga_registro(registro_a_excluir)
+    
+if acao == 'n':
+    exit(0)
+
+
+
+
+
+
+    
+    
+# ## Apaga o registro
+# Registro = "Registro: " + registro_a_excluir
+
+
+# with open ("livros.txt","r") as arq:
+#     lista_de_linhas = arq.readlines()
+    
+#     arq.close() #Fecha arquivo
+    
+#     for indice,linha in enumerate(lista_de_linhas):
+        
+#         linha = linha.replace('"','')
+#         linha = linha.replace("'","")
+        
+        
+#         if Registro in linha:
+#             indice_para_excluir = indice
+    
+    
+#     if type(indice_para_excluir) is int:
+#         lista_de_linhas.pop(indice_para_excluir)
+#         print("Livro apagado com sucesso")
+        
+#     else:
+#         print("O Livro não foi localizado")
+    
+# with open("livros.txt","w") as arq: #Abre arquivo modo escrita
+        
+#     for linha in lista_de_linhas:
+#         linha.strip() # Tira eventuais espaços em branco no inicio ou final 
+#         #linha = linha + '\n' #Coloca a próxima inserção na linha abaixo
+#         arq.write(linha)
+    
+#     arq.close()
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import datetime
+
+# def busca_info(Registro, tipo):
+    
+#     arquivo_para_ler = ''  
+    
+#     if tipo == 'leitor':
+#         arquivo_para_ler = "leitores.txt"
+        
+#     if tipo == 'livro':
+#         arquivo_para_ler = "livros.txt"
+        
+#     if tipo == 'emprestimo':
+#         arquivo_para_ler = "emprestimos.txt"
+        
+#     with open(arquivo_para_ler,"r") as arq:
+        
+#         for linha in arq:
+#             dicionario = eval(linha)
+        
+#             procura = str(dicionario['Registro'])
+#             procura = procura.strip()
+#             Registro = Registro.strip()
+            
+#             if procura == Registro:
+#                 nome = dicionario
+#                 break
                 
-            else:
-                nome = "Nao localizado"
+#             else:
+#                 nome = "Nao localizado"
     
-    arq.close()#Fecha arquivo            
+#     arq.close()#Fecha arquivo            
     
     
-    print("O que foi captado:",nome)
+#     print("O que foi captado:",nome)
 
-Registro = '9'
-tipo = 'emprestimo'
+# Registro = '9'
+# tipo = 'emprestimo'
 
-busca_info(Registro, tipo)
+# busca_info(Registro, tipo)
+
+
+
+
+
+
+
+
 
 
 # Registro = '"Registro": 2'

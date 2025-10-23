@@ -40,10 +40,7 @@ while True:
        
     if menu_principal == '1':
         cadastra_livro.menu_livro()
-        ficha_livro = confirma.confirma_cadastro("livro")
-        confirmacao_livro = relatorios.monta_string_livro(ficha_livro)
-        print(confirmacao_livro)
-    
+        
    
     #### Início Cadastra Leitor ###
 

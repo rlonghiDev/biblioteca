@@ -33,6 +33,86 @@ def cadastrar_livro():
     
     
     
+relatorios.relatorio_livros()
+    
+def apaga_registro(registro_a_excluir):
+    
+    registro_a_excluir = str(registro_a_excluir) #volta para string
+    Registro = "Registro: " + registro_a_excluir
+
+
+    with open ("livros.txt","r") as arq:
+        lista_de_linhas = arq.readlines()
+        
+        arq.close() #Fecha arquivo
+        
+        for indice,linha in enumerate(lista_de_linhas):
+            
+            linha = linha.replace('"','')
+            linha = linha.replace("'","")
+            
+            
+            if Registro in linha:
+                indice_para_excluir = indice
+        
+        
+        if type(indice_para_excluir) is int:
+            lista_de_linhas.pop(indice_para_excluir)
+            print("Livro apagado com sucesso")
+            
+        else:
+            print("O Livro não foi localizado")
+        
+    with open("livros.txt","w") as arq: #Abre arquivo modo escrita
+            
+        for linha in lista_de_linhas:
+            linha.strip() # Tira eventuais espaços em branco no inicio ou final 
+            #linha = linha + '\n' #Coloca a próxima inserção na linha abaixo
+            arq.write(linha)
+        
+        arq.close()
+    
+
+
+    
+## Pergunta qual excluir
+
+def proc_apaga_registro():
+    
+    relatorios.relatorio_livros()
+
+    registro_a_excluir = input("Digite o número do registro do livro a ser excluído\n")
+
+    relatorios.limpa_linha_em_branco('livro')
+
+    with open("livros.txt","r") as arq:
+        
+        for linha in arq:
+            dicionario = eval(linha)
+            
+            registro_a_excluir = int(registro_a_excluir)
+            
+            if dicionario['Registro'] == registro_a_excluir:
+                
+                ficha = relatorios.monta_string_livro(dicionario)
+                
+                print(ficha)
+
+    #Fecha arquivo
+    arq.close()
+
+    acao = input("\nDeseja realmente apagar ? s/n\n")
+    acao.lower()
+
+
+    if acao == 's':
+        apaga_registro(registro_a_excluir)
+        
+    if acao == 'n':
+        return
+
+        
+    
     
 def menu_livro():
     while True:
@@ -46,7 +126,7 @@ def menu_livro():
             
             """)
         
-        escolha_do_usuario = input("O que você deseja fazer ?")
+        escolha_do_usuario = input("O que você deseja fazer ?\n")
 
         if escolha_do_usuario == "3":
             break
@@ -56,5 +136,11 @@ def menu_livro():
             ficha_livro = confirma.confirma_cadastro("livro")
             confirmacao_livro = relatorios.monta_string_livro(ficha_livro)
             print(confirmacao_livro)
+            
+        if escolha_do_usuario == '2':
+            proc_apaga_registro()
+            
+            
+        
 
 

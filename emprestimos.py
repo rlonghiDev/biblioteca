@@ -50,6 +50,7 @@ def realiza_emprestimo(registro_leitor,registro_livro):
 
 
 def apaga_linha(Registro):
+    
     Registro = "Registro: " + str(Registro)
     indice_para_apagar = ''
 
@@ -100,8 +101,7 @@ def apaga_emprestimo():
     
     print(ficha_emprestimo)
     
-    #print("Registro livro: ",registro_livro)
-    
+       
     if ficha_emprestimo != "Nao localizado":
         confirma = input("Confirma encerramento desse empréstimo ? s/n ")
     else:

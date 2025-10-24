@@ -1,7 +1,3 @@
-import ultimo_registro
-import json
-import datetime
-import math
 import avaliacao
 
 
@@ -17,6 +13,9 @@ def limpa_linha_em_branco(arquivo):
         
     if arquivo == "emprestimo":
         arquivo_para_abrir = "emprestimos.txt"
+        
+    if arquivo == "avaliacao":
+        arquivo_para_abrir = "avaliacao.txt"
         
     with open(arquivo_para_abrir, "r") as arq: #modo leitura
         linhas = arq.readlines()
@@ -93,6 +92,7 @@ def monta_string_livro(dict):
         linha5 = '#' + str51.rjust(21) + str52.ljust(21) + '#'
         str61 = 'Avaliação: '
         int62a = avaliacao.informa_media_avaliacao(1,dict['Registro'])
+        int62a = int(int62a)
         str62 =   (int62a * '|*')
         str62a = str(str62)
         linha6 = '#' + str61.rjust(21) + str62a.ljust(21) + '#'

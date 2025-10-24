@@ -1,6 +1,7 @@
 import ultimo_registro
 import confirma
 import relatorios
+import avaliacao
 import json
 
 def cadastrar_livro():
@@ -13,7 +14,8 @@ def cadastrar_livro():
     autor = input("Digite o nome do autor\n")
     qde_disp = int(input("Digite a quantidade disponível do livro\n"))
     qde_uso = 0
-    avaliacao_livro = int(input("Digite a sua avaliação do livro de 0 a 5\n"))
+    nota = int(input("Digite a sua avaliação do livro de 0 a 5\n"))
+    avaliacao.avaliacao(1,num_registro,nota)
     
     ## Coloca as informações no dicionário ##
     livro_dicionario = {}
@@ -21,7 +23,7 @@ def cadastrar_livro():
     livro_dicionario["autor"] = autor
     livro_dicionario["Qde_disp"] = qde_disp
     livro_dicionario["Qde_uso"] = qde_uso
-    livro_dicionario["rating"] = avaliacao_livro
+    livro_dicionario["rating"] = avaliacao.informa_media_avaliacao(1,num_registro)
     livro_dicionario["Registro"] = num_registro
 
     livro_str = json.dumps(livro_dicionario) + "\n"
@@ -33,7 +35,7 @@ def cadastrar_livro():
     
     
     
-relatorios.relatorio_livros()
+#relatorios.relatorio_livros()
     
 def apaga_registro(registro_a_excluir):
     

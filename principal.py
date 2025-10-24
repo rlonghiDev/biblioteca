@@ -1,18 +1,17 @@
 import time
-import datetime
 import cadastra_livro #Biblioteca criada para incluir novos livros
 import cadastro_leitor
 import relatorios
-import ultimo_registro
 import emprestimos
 import confirma
-import datetime
+import avaliacao
 
 
 
 while True:
     
     ### Apresentação e Menu inicial ##
+    
     print("""
           Bem vindo ao sistema gerenciador de Biblioteca !
           
@@ -21,19 +20,20 @@ while True:
           2 - Opções sobre leitor
           3 - Menu empréstimo 
           4 - Imprimir um relatório
-          5 - Sair 
+          5 - Avaliar nosso atendimento
+          6 - Sair 
 
           """)
     
     #Recebe a escolha e verifica opção válida
     menu_principal = input("Digite a opção desejada\n")
-    if menu_principal != '1' and menu_principal != '2' and menu_principal != '3' and menu_principal != '4' and menu_principal != '5':
+    if menu_principal != '1' and menu_principal != '2' and menu_principal != '3' and menu_principal != '4' and menu_principal != '5' and menu_principal != '6':
         print("Opção incorreta, tente novamente")
         time.sleep(3)
         continue
     
     ######Saída do Looping #####
-    if menu_principal =='5':
+    if menu_principal =='6':
         break
     
     ####Início Cadastra Livro ###
@@ -46,10 +46,8 @@ while True:
 
     
     if menu_principal == '2':
-        cadastro_leitor.cadastrar_leitor()
-        ficha_leitor = confirma.confirma_cadastro("leitor")
-        confirmacao_leitor = relatorios.monta_string_leitor(ficha_leitor)
-        print(confirmacao_leitor)
+       cadastro_leitor.menu_leitor()
+        
 
     ### Final Cadastra Leitor ###
 
@@ -120,3 +118,22 @@ while True:
                 relatorios.relatorio_emprestimo()
 
         ##### Final Relatório Leitores ######
+        
+        ##### Avaliação ######
+        
+    if menu_principal == '5':
+        
+        resultado = avaliacao.menu_avaliação_atendimento()
+                
+        if resultado == 'erro':
+            print("Tente novamente")
+            
+        if resultado == 'sucesso':
+            print("Avaliação registrada com sucesso\nAgradecemos sua avaliação")
+            time.sleep(3)
+            print(type(resultado))
+            time.sleep(3)
+            
+        if isinstance(resultado,float):
+            print("A nota media de atendimento da biblioteca é : ",round(resultado,1))
+            time.sleep(3)

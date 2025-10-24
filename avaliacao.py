@@ -1,5 +1,10 @@
+import relatorios
+import time
+
 ## Recebe a avaliação e escreve no arquivo
 def avaliacao(tipo,Registro,nota):
+    # tipo 0 se for atendimento
+    # tipo 1 se for livro
 
     ##Prepara os dados e escreve no arquivo 
 
@@ -15,12 +20,14 @@ def avaliacao(tipo,Registro,nota):
 
 
 def informa_media_avaliacao(tipo,Registro):
+    
     # tipo => 0 se for sobre atendimento 
     # tipo => 1 se for sobre livro
 
     ## Registro => 0 se for sobre atendimento 
     ## Registro diferente de 0 para entregar a avaliação correspondente ao livro, Registro indica qual é o livro 
     
+    relatorios.limpa_linha_em_branco('avaliacao')
 
     soma_notas_atendimento = 0
     soma_notas_livro = 0
@@ -30,20 +37,24 @@ def informa_media_avaliacao(tipo,Registro):
     c2 = 0
 
     with open("avaliacao.txt", "r") as ava:
+        
+        
           
         lista_int = []
         
 
         for linha in ava:
             linha = linha.replace('\n','')
+            linha = linha.replace(" ","")
+            linha = linha.strip()
             lista = linha.split(',')
-            print(lista)
+            
             # Altera 
             for i in lista:
-                lista_int.append(int(i))
-                                
-
-            print(lista_int,'\n')
+                i = i.strip()
+                i = i.replace(" ","")
+                i = int(i)
+                lista_int.append(i)
 
             #identifica avaliação de atendimento
             if lista_int[0] == 0:
@@ -63,14 +74,45 @@ def informa_media_avaliacao(tipo,Registro):
     if tipo == 0:
         if soma_notas_atendimento > 0:
             media_atendimento = (soma_notas_atendimento / c1)
-            #print(media_atendimento)
             return media_atendimento
 
     if tipo == 1:
         if soma_notas_livro > 0:
             media_livro = (soma_notas_livro/c2)
-            #print(round(media_livro,1))
             return media_livro
 
 
+def menu_avaliação_atendimento():
+    print("""
+          Olá !
+          Sua avaliação é muito importante para nós.
+          Digite abaixo sua opinião/avaliação sendo:
+          1 - Totalmente insatisfeito
+          5 - Atendimento espetacular
+          
+          Se você deseja saber como anda nosso atedimento ...
+          Digite 6
+          """)
+    
+    nota_atendimento = int(input("Digite aqui a sua nota\n"))
+    
+        
+    if nota_atendimento in range(1,6):
+        avaliacao(0,0,nota_atendimento)
+        return 'sucesso'
+    
+    if nota_atendimento not in range(1,7):
+        print("Valor inválido, tente novamente")
+        time.sleep(3)
+        return 'erro'
+    
+    if nota_atendimento == 6:
+        
+        nota_media_atendimento = informa_media_avaliacao(0,0)
+        return nota_media_atendimento
+    
+        
+        
+        
+        
 

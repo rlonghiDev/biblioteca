@@ -1,8 +1,7 @@
-import json
 import datetime
 import ultimo_registro
 import relatorios
-import avaliacao_livro
+import avaliacao
 
 def realiza_emprestimo(registro_leitor,registro_livro):
                 
@@ -109,7 +108,8 @@ def apaga_emprestimo():
         confirma = 'n'
     
     if confirma == 's':
-        avaliacao_livro.avaliacao_livro(registro_livro)
+        nota = int(input("Dê sua avaliação de 1 a 5 para o livro"))
+        avaliacao.avaliacao(1,registro_livro,nota)
         apaga_linha(Registro)
     
     if confirma == 'n':

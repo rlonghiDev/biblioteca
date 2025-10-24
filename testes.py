@@ -1,56 +1,102 @@
 
-def informa_media_avaliacao(tipo,Registro):
-    # tipo => 0 se for sobre atendimento 
-    # tipo => 1 se for sobre livro
 
-    ## Registro => 0 se for sobre atendimento 
-    ## Registro diferente de 0 para entregar a avaliação correspondente ao livro, Registro indica qual é o livro 
+def apaga_leitor(registro):
+    
+    with open("leitores.txt","r") as leitores:
+        linhas = leitores.readlines()
+        
+        leitores.close()
+        
+    for indice,linha in enumerate (linhas):
+        print("Linha: ",linha, type(linha))
+        pedaco_final = linha[-17:-1]
+        
+        print(pedaco_final.find(registro))
+        
+        if pedaco_final.find(registro) > -1:
+            index_para_apagar = indice
+            print(index_para_apagar)
+            linhas.pop(index_para_apagar)
+            break
+        
+        if pedaco_final.find(registro) <= -1:
+            print("Registro de Leitor não localizado")
+    
+    
+    with open("leitores.txt","wt") as leitores:
+        leitores.writelines(linhas)
+    leitores.close()
+
+apaga_leitor('2')
+        
+        
+
+
+
+# import relatorios
+
+# def informa_media_avaliacao(tipo,Registro):
+   
+#     # tipo => 0 se for sobre atendimento 
+#     # tipo => 1 se for sobre livro
+
+#     ## Registro => 0 se for sobre atendimento 
+#     ## Registro diferente de 0 para entregar a avaliação correspondente ao livro, Registro indica qual é o livro 
      
+#     relatorios.limpa_linha_em_branco('avaliacao')
 
+#     soma_notas_atendimento = 0
+#     soma_notas_livro = 0
+#     media_atendimento = 0
+#     media_livro = 0
+#     c1 = 0
+#     c2 = 0
 
+#     with open("avaliacao.txt", "r") as ava:
+            
 
+#         lista_int = []
+            
 
-    soma_notas_atendimento = 0
-    soma_notas_livro = 0
-    media_atendimento = 0
-    media_livro = 0
-    c1 = 0
-    c2 = 0
+#         for linha in ava:
+#             linha = linha.replace('\n','')
+#             linha = linha.replace(" ","")
+#             linha = linha.strip()
+#             lista = linha.split(',')
+            
+#             # Altera 
+#             for i in lista:
+#                 i = i.strip()
+#                 i = i.replace(" ","")
+#                 i = int(i)
+#                 lista_int.append(i)
 
-    with open("avaliacao.txt", "r") as ava:
-          
+#             #identifica avaliação de atendimento
+#             if lista_int[0] == 0:
+#                 soma_notas_atendimento += lista_int[2]
+#                 c1 += 1
 
-        for linha in ava:
-            linha = linha.replace('\n','')
-            lista = linha.split(',')
-            for i in range(len(lista)):
-                lista[i] = int(lista[i])
-            print(lista)
+#             #Identifica avaliação de livro
 
-            #identifica avaliação de atendimento
-            if lista[0] == 0:
-                soma_notas_atendimento += lista[2]
-                c1 += 1
+#             if lista_int[0] == 1:
+#                 if lista_int[1] == Registro:
+#                     soma_notas_livro += lista_int[2]
+#                     c2 += 1
 
-            #Identifica avaliação de livro
+#             lista_int.clear()
+#     ava.close()
 
-            if lista[0] == 1:
-                if lista[1] == Registro:
-                    soma_notas_livro += lista[2]
-                    c2 += 1
+#     if tipo == 0:
+#         if soma_notas_atendimento > 0:
+#             media_atendimento = (soma_notas_atendimento / c1)
+#             print("Atendimento: ",round(media_atendimento,1))
+#             return round(media_atendimento,1)
 
-
-        if tipo == 0:
-            if soma_notas_atendimento > 0:
-                media_atendimento = (soma_notas_atendimento / c1)
-                #print(media_atendimento)
-                return media_atendimento
-
-        if tipo == 1:
-            if soma_notas_livro > 0:
-                media_livro = (soma_notas_livro/c2)
-                #print(round(media_livro,1))
-                return media_livro
+#     if tipo == 1:
+#         if soma_notas_livro > 0:
+#             media_livro = (soma_notas_livro/c2)
+#             print("Livro: ",round(media_livro,1))
+#             return round(media_livro,1)
 
 
 
@@ -61,7 +107,8 @@ def informa_media_avaliacao(tipo,Registro):
     
     
 
-informa_media_avaliacao(1,2)
+# nota =  informa_media_avaliacao(0,0)
+# print(nota)
 
 
 

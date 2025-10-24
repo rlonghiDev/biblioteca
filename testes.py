@@ -1,83 +1,205 @@
-import relatorios
 
-relatorios.relatorio_livros()
+def informa_media_avaliacao(tipo,Registro):
+    # tipo => 0 se for sobre atendimento 
+    # tipo => 1 se for sobre livro
+
+    ## Registro => 0 se for sobre atendimento 
+    ## Registro diferente de 0 para entregar a avaliação correspondente ao livro, Registro indica qual é o livro 
+     
+
+
+
+
+    soma_notas_atendimento = 0
+    soma_notas_livro = 0
+    media_atendimento = 0
+    media_livro = 0
+    c1 = 0
+    c2 = 0
+
+    with open("avaliacao.txt", "r") as ava:
+          
+
+        for linha in ava:
+            linha = linha.replace('\n','')
+            lista = linha.split(',')
+            for i in range(len(lista)):
+                lista[i] = int(lista[i])
+            print(lista)
+
+            #identifica avaliação de atendimento
+            if lista[0] == 0:
+                soma_notas_atendimento += lista[2]
+                c1 += 1
+
+            #Identifica avaliação de livro
+
+            if lista[0] == 1:
+                if lista[1] == Registro:
+                    soma_notas_livro += lista[2]
+                    c2 += 1
+
+
+        if tipo == 0:
+            if soma_notas_atendimento > 0:
+                media_atendimento = (soma_notas_atendimento / c1)
+                #print(media_atendimento)
+                return media_atendimento
+
+        if tipo == 1:
+            if soma_notas_livro > 0:
+                media_livro = (soma_notas_livro/c2)
+                #print(round(media_livro,1))
+                return media_livro
+
+
+
+                
+
+            
+            
     
-def apaga_registro(registro_a_excluir):
-    
-    registro_a_excluir = str(registro_a_excluir) #volta para string
-    Registro = "Registro: " + registro_a_excluir
-
-
-    with open ("livros.txt","r") as arq:
-        lista_de_linhas = arq.readlines()
-        
-        arq.close() #Fecha arquivo
-        
-        for indice,linha in enumerate(lista_de_linhas):
-            
-            linha = linha.replace('"','')
-            linha = linha.replace("'","")
-            
-            
-            if Registro in linha:
-                indice_para_excluir = indice
-        
-        
-        if type(indice_para_excluir) is int:
-            lista_de_linhas.pop(indice_para_excluir)
-            print("Livro apagado com sucesso")
-            
-        else:
-            print("O Livro não foi localizado")
-        
-    with open("livros.txt","w") as arq: #Abre arquivo modo escrita
-            
-        for linha in lista_de_linhas:
-            linha.strip() # Tira eventuais espaços em branco no inicio ou final 
-            #linha = linha + '\n' #Coloca a próxima inserção na linha abaixo
-            arq.write(linha)
-        
-        arq.close()
     
 
+informa_media_avaliacao(1,2)
 
+
+
+
+
+
+
+
+# def avaliacao(tipo,Registro,nota):
+
+#     ##Prepara os dados e escreve no arquivo 
+
+#     lista_para_escrever = []
+#     lista_para_escrever.append(tipo)
+#     lista_para_escrever.append(int(Registro))
+#     lista_para_escrever.append(int(nota))
+#     lista_para_escrever = str(lista_para_escrever) + '\n'
+
+#     with open("avaliacao.txt","at") as ava:
+
+#       ava.write(lista_para_escrever)
     
-## Pergunta qual excluir
+#     ava.close()  
 
-registro_a_excluir = input("Digite o número do registro do livro a ser excluído\n")
 
-relatorios.limpa_linha_em_branco('livro')
 
-with open("livros.txt","r") as arq:
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import relatorios
+
+# relatorios.relatorio_livros()
     
-    for linha in arq:
-        dicionario = eval(linha)
+# def apaga_registro(registro_a_excluir):
+    
+#     registro_a_excluir = str(registro_a_excluir) #volta para string
+#     Registro = "Registro: " + registro_a_excluir
+
+
+#     with open ("livros.txt","r") as arq:
+#         lista_de_linhas = arq.readlines()
         
-        print("Registro a excluir: ", registro_a_excluir)
-        print(dicionario)
-        print(registro_a_excluir in dicionario)
-        print(type(dicionario))
+#         arq.close() #Fecha arquivo
         
-        registro_a_excluir = int(registro_a_excluir)
-        
-        if dicionario['Registro'] == registro_a_excluir:
+#         for indice,linha in enumerate(lista_de_linhas):
             
-            ficha = relatorios.monta_string_livro(dicionario)
+#             linha = linha.replace('"','')
+#             linha = linha.replace("'","")
             
-            print(ficha)
-
-#Fecha arquivo
-arq.close()
-
-acao = input("\nDeseja realmente apagar ? s/n\n")
-acao.lower()
-
-
-if acao == 's':
-    apaga_registro(registro_a_excluir)
+            
+#             if Registro in linha:
+#                 indice_para_excluir = indice
+        
+        
+#         if type(indice_para_excluir) is int:
+#             lista_de_linhas.pop(indice_para_excluir)
+#             print("Livro apagado com sucesso")
+            
+#         else:
+#             print("O Livro não foi localizado")
+        
+#     with open("livros.txt","w") as arq: #Abre arquivo modo escrita
+            
+#         for linha in lista_de_linhas:
+#             linha.strip() # Tira eventuais espaços em branco no inicio ou final 
+#             #linha = linha + '\n' #Coloca a próxima inserção na linha abaixo
+#             arq.write(linha)
+        
+#         arq.close()
     
-if acao == 'n':
-    exit(0)
+
+
+    
+# ## Pergunta qual excluir
+
+# registro_a_excluir = input("Digite o número do registro do livro a ser excluído\n")
+
+# relatorios.limpa_linha_em_branco('livro')
+
+# with open("livros.txt","r") as arq:
+    
+#     for linha in arq:
+#         dicionario = eval(linha)
+        
+#         print("Registro a excluir: ", registro_a_excluir)
+#         print(dicionario)
+#         print(registro_a_excluir in dicionario)
+#         print(type(dicionario))
+        
+#         registro_a_excluir = int(registro_a_excluir)
+        
+#         if dicionario['Registro'] == registro_a_excluir:
+            
+#             ficha = relatorios.monta_string_livro(dicionario)
+            
+#             print(ficha)
+
+# #Fecha arquivo
+# arq.close()
+
+# acao = input("\nDeseja realmente apagar ? s/n\n")
+# acao.lower()
+
+
+# if acao == 's':
+#     apaga_registro(registro_a_excluir)
+    
+# if acao == 'n':
+#     exit(0)
 
 
 

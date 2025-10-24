@@ -2,6 +2,7 @@ import ultimo_registro
 import json
 import datetime
 import math
+import avaliacao
 
 
 #### Limpa linha em branco #####
@@ -91,7 +92,8 @@ def monta_string_livro(dict):
         str52 = str(dict['Registro'])
         linha5 = '#' + str51.rjust(21) + str52.ljust(21) + '#'
         str61 = 'Avaliação: '
-        str62 = (math.floor(dict['rating']) * '|*')
+        int62a = avaliacao.informa_media_avaliacao(1,dict['Registro'])
+        str62 =   (int62a * '|*')
         str62a = str(str62)
         linha6 = '#' + str61.rjust(21) + str62a.ljust(21) + '#'
 

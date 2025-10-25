@@ -4,7 +4,6 @@ def apaga_leitor(registro):
     
     with open("leitores.txt","r") as leitores:
         linhas = leitores.readlines()
-        
         leitores.close()
         
     for indice,linha in enumerate (linhas):
@@ -27,7 +26,7 @@ def apaga_leitor(registro):
         leitores.writelines(linhas)
     leitores.close()
 
-apaga_leitor('2')
+apaga_leitor('5')
         
         
 

@@ -33,26 +33,31 @@ def apaga_leitor(registro):
     
     with open("leitores.txt","r") as leitores:
         linhas = leitores.readlines()
-        
         leitores.close()
         
     for indice,linha in enumerate (linhas):
         pedaco_final = linha[-17:-1]
-    
-        
+                
         if pedaco_final.find(registro) > -1:
             index_para_apagar = indice
             linhas.pop(index_para_apagar)
-            return 'sucesso'
+            resultado = 'sucesso'
+            break
             
         
         if pedaco_final.find(registro) <= -1:
-            return 'erro'
-    
+            resultado = 'erro'
+
     
     with open("leitores.txt","wt") as leitores:
         leitores.writelines(linhas)
     leitores.close()
+
+    if resultado == 'sucesso':
+        return 'sucesso'
+    
+    if resultado == 'erro':
+        return 'erro'
 
         
         
@@ -82,7 +87,7 @@ def menu_leitor():
         if escolha == '2':
             print(relatorios.relatorio_leitores())
             
-            registro_leitor = input("Digite o número do registro do leitor a ser apagado")
+            registro_leitor = input("Digite o número do registro do leitor a ser apagado\n")
             status = apaga_leitor(registro_leitor)
             
             if status =="sucesso":
